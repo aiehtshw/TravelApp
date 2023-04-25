@@ -1,7 +1,10 @@
 
 export const COLORS = {
   background: '#F5F5F5',
-  loginBackground: '#DC188F',
+  loginBackground: '#FFCDEB',
   loginButton:'#09858F',
+  iconColor: '#02CCDB',
+  placeHolder: '#968518',
+  white: '#FFFFFF',
 }
 export default { COLORS };

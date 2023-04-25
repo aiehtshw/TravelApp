@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from "react-native";
 import {COLORS} from '~/utils/colors'
 import { DEFAULT_LANGUAGE, Languages } from "~/config";
+import { Camera } from "../../../../assets/icons";
 
 const Login = () => {
   return (

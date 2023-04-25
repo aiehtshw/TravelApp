@@ -152,4 +152,4 @@ const styles = StyleSheet.create({
     justifyContent:"center",
   }
 });
-export default Login
+export default Login;

@@ -6,5 +6,6 @@ export const COLORS = {
   iconColor: '#02CCDB',
   placeHolder: '#968518',
   white: '#FFFFFF',
+  point_circle:'#70AD47',
 }
 export default { COLORS };

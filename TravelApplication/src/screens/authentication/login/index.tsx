@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from "react-native";
 import {COLORS} from '~/utils/colors'
 import { DEFAULT_LANGUAGE, Languages } from "~/config";
-import { At, Camera, Password } from "../../../../assets/icons";
+import { At, Camera, HidePassword, Password, ShowPassword } from "../../../../assets/icons";
 import { RFValue } from "react-native-responsive-fontsize";
 
 const Login = () => {
+  const [showPassword,setShowPassword] = useState<boolean>(true);
+  const signUp = () => {
+
+  }
+  const forgotPassword = () => {
+
+  }
+  const login = () => {
+
+  }
   return (
     <View style={styles.container}>
       <View style={styles.content}>
@@ -18,18 +28,36 @@ const Login = () => {
           <View style={{justifyContent:"center"}}>
             <At fill={COLORS.iconColor} width={20} height={20}/>
           </View>
-          <TextInput style={styles.login_text}/>
+          <TextInput
+            keyboardType={"email-address"}
+            placeholder={Languages[DEFAULT_LANGUAGE].email}
+            style={styles.login_text}/>
         </View>
 
         <View style={styles.password}>
           <View style={{justifyContent:"center"}}>
             <Password fill={COLORS.iconColor} width={20} height={20}/>
           </View>
-          <TextInput style={styles.login_text}/>
+          <TextInput
+            placeholder={Languages[DEFAULT_LANGUAGE].password}
+            secureTextEntry={showPassword}
+            style={[styles.login_text,{width:'75%'}]}
+          />
+
+          <View style={{justifyContent:"center",borderBottomWidth:1,borderBottomColor:COLORS.iconColor}}>
+            <TouchableOpacity
+              onPress={() => setShowPassword(!showPassword)}>
+              {
+                showPassword
+                  ? <ShowPassword fill={COLORS.iconColor} width={20} height={20}/>
+                  : <HidePassword fill={COLORS.iconColor} width={20} height={20}/>
+              }
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.forgotPassword}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={forgotPassword}>
             <Text style={
               { color:COLORS.placeHolder,
                 fontStyle:"italic"
@@ -38,7 +66,7 @@ const Login = () => {
         </View>
 
         <View style={styles.enter}>
-          <TouchableOpacity >
+          <TouchableOpacity onPress={login}>
             <View style={styles.enterArea}>
               <Text style={
                 {textAlign:"center",
@@ -53,7 +81,7 @@ const Login = () => {
 
         <View style={styles.haveAccount}>
           <Text>{Languages[DEFAULT_LANGUAGE].haveYouAccount}</Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={signUp}>
             <Text style={{
               color:COLORS.placeHolder,
               fontStyle:"italic",

@@ -5,9 +5,10 @@ import { Camera, Community, History, Hotel, Restourant, Weather } from "#/icons"
 import { COLORS } from "../../../utils/colors";
 import HomeButton from "./components/HomeButton";
 import { ScreenTitles } from "../../../utils/enums";
+import { Routes } from "../../../navigator/routes";
 
 
-const Home = () => {
+const Home = ({navigation}) => {
   const box = [
     {
       id: '1',
@@ -49,22 +50,22 @@ const Home = () => {
   const homeNavigator = (title: string) => {
     switch (title){
       case ScreenTitles.Camera:
-        console.log("camera")
+        navigation.navigate(Routes.HomeStack.Photography)
         break;
       case ScreenTitles.Restaurant:
-        console.log("restaurant")
+        navigation.navigate(Routes.HomeStack.Restaurant)
         break;
       case ScreenTitles.History:
-        console.log("history")
+        navigation.navigate(Routes.HomeStack.History)
         break;
       case ScreenTitles.Community:
-
+        navigation.navigate(Routes.HomeStack.Community)
         break;
       case ScreenTitles.Hotel:
-
+        navigation.navigate(Routes.HomeStack.Hotel)
         break;
       case ScreenTitles.Weather:
-
+        navigation.navigate(Routes.HomeStack.Weather)
         break;
     }
   }

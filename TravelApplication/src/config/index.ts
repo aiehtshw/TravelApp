@@ -14,3 +14,5 @@ export const Devices = {
   height: HEIGHT_SCREEN,
   width: WIDTH_SCREEN,
 }
+
+export const HOME_SCREEN_ICON_SIZE = Devices.width/4

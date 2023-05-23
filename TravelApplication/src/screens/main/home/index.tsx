@@ -8,7 +8,7 @@ import { ScreenTitles } from "../../../utils/enums";
 import { Routes } from "../../../navigator/routes";
 
 
-const Home = ({navigation}) => {
+const Home = ({navigation}:any) => {
   const box = [
     {
       id: '1',

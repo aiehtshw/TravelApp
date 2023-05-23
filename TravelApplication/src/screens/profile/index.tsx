@@ -10,6 +10,7 @@ import {
 import ProfileInfo from "./components/profileInfo";
 import HomeButton from "../main/home/components/HomeButton";
 import { BackArrow, Camera, Community, Favorites, History, Location, Star } from "#/icons";
+import { FirebaseUtils } from "../../services/firebase/FirebaseUtils";
 
 const Profile = () => {
   const list = [
@@ -53,6 +54,9 @@ const Profile = () => {
       id: '7',
       icon: <BackArrow width={30} height={30}/>,
       text: "LogOut",
+      onPress: () => {
+        FirebaseUtils.logOut()
+      },
       disable: false
     }
   ];
@@ -78,7 +82,7 @@ const Profile = () => {
           data={list}
           renderItem={
             ({ item,index }) => (
-              <ProfileInfo icon={item.icon} text={item.text} disable={item.disable} index={index}/>
+              <ProfileInfo icon={item.icon} text={item.text} disable={item.disable} onPress={item.onPress} index={index}/>
             )
           }
           keyExtractor={list => list.id}

@@ -1,6 +1,8 @@
 export const Routes = {
   AuthStack: {
-    Login:'Login'
+    Login:'Login',
+    SingUp: 'SignUp',
+    ForgotPassword: 'ForgotPassword'
   },
   BottomStack: {
     Home: 'Home',

@@ -3,7 +3,7 @@ import en from "../utils/languages/locales/en";
 import { Dimensions, Platform } from "react-native";
 
 export const Languages = Object.assign({}, { tr,en });
-export const DEFAULT_LANGUAGE = 'en';
+export const DEFAULT_LANGUAGE = 'tr';
 
 
 const HEIGHT_SCREEN = Dimensions.get('window').height;

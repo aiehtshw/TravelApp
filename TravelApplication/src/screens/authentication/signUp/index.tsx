@@ -4,29 +4,28 @@ import {COLORS} from '~/utils/colors'
 import { DEFAULT_LANGUAGE, Languages } from "~/config";
 import { At, Camera, HidePassword, Password, ShowPassword } from "../../../../assets/icons";
 import { RFValue } from "react-native-responsive-fontsize";
+import Login from "../login";
 import { Routes } from "../../../navigator/routes";
 import { FirebaseUtils } from "../../../services/firebase/FirebaseUtils";
 
-const Login = ({navigation}:any) => {
+const SignUp = ({navigation}:any) => {
   const [showPassword,setShowPassword] = useState<boolean>(true);
   const [mail,setMail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const signUp = () => {
-    navigation.navigate(Routes.AuthStack.SingUp);
-  }
-  const forgotPassword = () => {
-
+    if(mail && password)
+      FirebaseUtils.signUp(mail,password);
   }
   const login = () => {
-    if(mail && password)
-      FirebaseUtils.login(mail,password);
+    if(navigation.canGoBack())
+      navigation.goBack();
   }
   return (
     <View style={styles.container}>
       <View style={styles.content}>
 
         <View style={styles.textContainer}>
-          <Text style={{fontSize:RFValue(20),fontWeight:'bold'}}>{Languages[DEFAULT_LANGUAGE].login}</Text>
+          <Text style={{fontSize:RFValue(20),fontWeight:'bold'}}>{Languages[DEFAULT_LANGUAGE].signUp}</Text>
         </View>
 
         <View style={styles.email}>
@@ -65,36 +64,27 @@ const Login = ({navigation}:any) => {
           </View>
         </View>
 
-        <View style={styles.forgotPassword}>
-          <TouchableOpacity onPress={forgotPassword}>
-            <Text style={
-              { color:COLORS.placeHolder,
-                fontStyle:"italic"
-              }}>{Languages[DEFAULT_LANGUAGE].forgotPassword}</Text>
-          </TouchableOpacity>
-        </View>
-
         <View style={styles.enter}>
-          <TouchableOpacity onPress={login}>
+          <TouchableOpacity onPress={signUp}>
             <View style={styles.enterArea}>
               <Text style={
                 {textAlign:"center",
                   color:COLORS.white,
                   fontSize:RFValue(15),
                   fontWeight:'bold',}}>
-                {Languages[DEFAULT_LANGUAGE].login}
+                {Languages[DEFAULT_LANGUAGE].signUp}
               </Text>
             </View>
           </TouchableOpacity>
         </View>
 
         <View style={styles.haveAccount}>
-          <Text>{Languages[DEFAULT_LANGUAGE].haveYouAccount}</Text>
-          <TouchableOpacity onPress={signUp}>
+          <Text>{Languages[DEFAULT_LANGUAGE].haveAccount}</Text>
+          <TouchableOpacity onPress={login}>
             <Text style={{
               color:COLORS.placeHolder,
               fontStyle:"italic",
-            }}>  {Languages[DEFAULT_LANGUAGE].signUp}</Text>
+            }}>  {Languages[DEFAULT_LANGUAGE].login}</Text>
           </TouchableOpacity>
         </View>
 
@@ -161,4 +151,4 @@ const styles = StyleSheet.create({
     justifyContent:"center",
   }
 });
-export default Login;
+export default SignUp;

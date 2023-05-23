@@ -5,7 +5,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 const ProfileInfo = (props:any) => {
 
   return (
-    <TouchableOpacity disabled={props.disable}>
+    <TouchableOpacity disabled={props.disable} onPress={props.onPress}>
       <View style={[{flexDirection: "row", padding:10, alignItems:'center'},
         props.index === 4
         ? {borderBottomWidth:1}:{}]}>

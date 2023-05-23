@@ -18,6 +18,7 @@ const HomeNavigator = () => {
       /*tabBarLabel: ({ focused }) => {
         return <Text style={{fontSize: 14, fontWeight: '600'}}>{focused ? "." : ""}</Text>
       }, */
+      headerShown:true,
       headerTitleAlign: 'center',headerTintColor: COLORS.white,backgroundColor:COLORS.navigator_color,headerStyle: {
         backgroundColor: COLORS.navigator_color
       },

@@ -2,19 +2,22 @@ import React, { useState } from "react";
 import { StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from "react-native";
 import {COLORS} from '~/utils/colors'
 import { DEFAULT_LANGUAGE, Languages } from "~/config";
-import { At, Camera, HidePassword, Password, ShowPassword } from "../../../../assets/icons";
+import { At, Camera, HidePassword, Password, ProfileIcon, ShowPassword } from "../../../../assets/icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import Login from "../login";
 import { Routes } from "../../../navigator/routes";
-import { FirebaseUtils } from "../../../services/firebase/FirebaseUtils";
+import { FirebaseAuthUtils } from "../../../services/firebaseAuth/FirebaseAuthUtils";
 
 const SignUp = ({navigation}:any) => {
   const [showPassword,setShowPassword] = useState<boolean>(true);
   const [mail,setMail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const [username, setUsername] = useState<string>();
   const signUp = () => {
-    if(mail && password)
-      FirebaseUtils.signUp(mail,password);
+    console.log(username)
+    if(mail && password && username){
+      FirebaseAuthUtils.signUp(mail,password,username);
+    }
   }
   const login = () => {
     if(navigation.canGoBack())
@@ -38,6 +41,18 @@ const SignUp = ({navigation}:any) => {
             keyboardType={"email-address"}
             placeholder={Languages[DEFAULT_LANGUAGE].email}
             style={styles.login_text}/>
+        </View>
+
+        <View style={styles.username}>
+          <View style={{justifyContent:"center"}}>
+            <ProfileIcon fill={COLORS.iconColor} width={20} height={20}/>
+          </View>
+          <TextInput
+            placeholder={Languages[DEFAULT_LANGUAGE].username}
+            onChangeText={username => setUsername(username)}
+            value={username}
+            style={styles.login_text}
+          />
         </View>
 
         <View style={styles.password}>
@@ -122,6 +137,12 @@ const styles = StyleSheet.create({
     borderBottomColor: COLORS.iconColor,
     borderBottomWidth:1,
     width:'80%',
+  },
+  username: {
+    marginTop:25,
+    height:40,
+    marginLeft:20,
+    flexDirection:"row",
   },
   password: {
     marginTop: 25,

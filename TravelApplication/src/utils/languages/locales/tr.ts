@@ -5,5 +5,6 @@ export default {
   haveAccount: 'Hesabın Var mı?',
   forgotPassword: 'Şifremi Unuttum',
   email: 'e-mail',
-  password: 'şifre'
+  password: 'şifre',
+  username: 'kullanıcı adı'
 };

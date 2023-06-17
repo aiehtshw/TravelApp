@@ -4,7 +4,7 @@ import { RFValue } from "react-native-responsive-fontsize";
 import PointCircle from "../../../../components/PointCircle";
 
 
-const Hotel = ( props:any ) => {
+const Restourant = ( props:any ) => {
 
   return(
 
@@ -21,7 +21,7 @@ const Hotel = ( props:any ) => {
         <Text style={{
           fontSize:RFValue(20),
           fontWeight:"bold"
-        }}>{props.hotel_name}</Text>
+        }}>{props.restourant_name}</Text>
         <View style={styles.point}>
           <PointCircle point={props.total_vote/props.total_vote_count}/>
           <Text style={styles.total_count_text}>{props.total_vote_count}</Text>
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Hotel;
+export default Restourant;

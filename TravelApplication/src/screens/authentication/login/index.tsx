@@ -5,7 +5,7 @@ import { DEFAULT_LANGUAGE, Languages } from "~/config";
 import { At, Camera, HidePassword, Password, ShowPassword } from "../../../../assets/icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import { Routes } from "../../../navigator/routes";
-import { FirebaseUtils } from "../../../services/firebase/FirebaseUtils";
+import { FirebaseAuthUtils } from "../../../services/firebaseAuth/FirebaseAuthUtils";
 
 const Login = ({navigation}:any) => {
   const [showPassword,setShowPassword] = useState<boolean>(true);
@@ -19,7 +19,7 @@ const Login = ({navigation}:any) => {
   }
   const login = () => {
     if(mail && password)
-      FirebaseUtils.login(mail,password);
+      FirebaseAuthUtils.login(mail,password);
   }
   return (
     <View style={styles.container}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { HOME_SCREEN_ICON_SIZE } from "~/config";
 import { Camera, Community, History, Hotel, Restourant, Weather } from "#/icons";
@@ -6,9 +6,18 @@ import { COLORS } from "../../../utils/colors";
 import HomeButton from "./components/HomeButton";
 import { ScreenTitles } from "../../../utils/enums";
 import { Routes } from "../../../navigator/routes";
+import { useDispatch } from "react-redux";
+import { showLoading } from "../../../redux/reducers/loading/loadingSlice";
+import { fetchlistRestourant } from "../../../redux/reducers/restourant/listRestourantsSlice";
+import { fetchlWeather } from "../../../redux/reducers/weather/weatherSlice";
+import { callMe } from "../../../redux/reducers/me/meSlice";
+import { useAppSelector } from "../../../redux/store";
+import { FireBaseRealTimeDBUtils } from "../../../services/firebaseRealTimeDBUtils/FireBaseRealTimeDBUtils";
 
 
 const Home = ({navigation}:any) => {
+  const dispatch = useDispatch();
+  const meState = useAppSelector((state) => state.meSlice);
   const box = [
     {
       id: '1',
@@ -47,12 +56,19 @@ const Home = ({navigation}:any) => {
       background: COLORS.home_weather_bg
     },
   ];
+
   const homeNavigator = (title: string) => {
+    dispatch(showLoading(true));
+    console.log("meState.me")
+    console.log(meState.me)
     switch (title){
       case ScreenTitles.Camera:
         navigation.navigate(Routes.HomeStack.Photography)
         break;
       case ScreenTitles.Restaurant:
+        dispatch(
+          fetchlistRestourant({})
+        )
         navigation.navigate(Routes.HomeStack.Restaurant)
         break;
       case ScreenTitles.History:
@@ -65,6 +81,7 @@ const Home = ({navigation}:any) => {
         navigation.navigate(Routes.HomeStack.Hotel)
         break;
       case ScreenTitles.Weather:
+        dispatch(fetchlWeather({}))
         navigation.navigate(Routes.HomeStack.Weather)
         break;
     }

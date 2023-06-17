@@ -15,3 +15,4 @@ export const Star = require('./src/favorites.svg').default;
 export const BackArrow = require('./src/back.svg').default;
 export const HomeIcon = require('./src/home.svg').default;
 export const ProfileIcon = require('./src/profile.svg').default;
+export const Celcius = require('./src/celcius.svg').default;

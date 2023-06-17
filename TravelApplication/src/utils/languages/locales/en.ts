@@ -5,5 +5,6 @@ export default {
   haveAccount: 'Do You Have Account?',
   forgotPassword: 'Forgot Password',
   email: 'e-mail',
-  password: 'password'
+  password: 'password',
+  username: 'username'
 };

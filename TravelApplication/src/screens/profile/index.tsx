@@ -10,9 +10,11 @@ import {
 import ProfileInfo from "./components/profileInfo";
 import HomeButton from "../main/home/components/HomeButton";
 import { BackArrow, Camera, Community, Favorites, History, Location, Star } from "#/icons";
-import { FirebaseUtils } from "../../services/firebase/FirebaseUtils";
+import { FirebaseAuthUtils } from "../../services/firebaseAuth/FirebaseAuthUtils";
+import { useAppSelector } from "../../redux/store";
 
 const Profile = () => {
+  const meState = useAppSelector((state) => state.meSlice);
   const list = [
     {
       id: '1',
@@ -55,7 +57,7 @@ const Profile = () => {
       icon: <BackArrow width={30} height={30}/>,
       text: "LogOut",
       onPress: () => {
-        FirebaseUtils.logOut()
+        FirebaseAuthUtils.logOut()
       },
       disable: false
     }
@@ -72,7 +74,7 @@ const Profile = () => {
           <Image source={{uri: 'https://imgv3.fotor.com/images/blog-cover-image/part-blurry-image.jpg'}}
                  style={{height: 150, width: 150, borderBottomRightRadius: 30, borderTopLeftRadius: 30}} />
           <View style={{justifyContent: "center", alignItems: "center"}}>
-            <Text style={{fontSize: 30, fontWeight: "bold", color: "#000"}}>{name}</Text>
+            <Text style={{fontSize: 30, fontWeight: "bold", color: "#000"}}>{meState.me.name}</Text>
             <Text style={{fontSize: 30, fontWeight: "bold", color: "#000"}}>{surname}</Text>
             <Text style={{fontSize: 14, fontWeight: "normal", color: "#000"}}>{year} Yılında Katıldı</Text>
           </View>

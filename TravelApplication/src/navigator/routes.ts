@@ -5,7 +5,7 @@ export const Routes = {
     ForgotPassword: 'ForgotPassword'
   },
   BottomStack: {
-    Home: 'Home',
+    Home: 'HomeScreen',
     Profile: 'Profile'
   },
   HomeStack: {

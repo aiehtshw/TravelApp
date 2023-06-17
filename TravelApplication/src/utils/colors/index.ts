@@ -15,6 +15,7 @@ export const COLORS = {
   home_community_bg: '#0072C6',
   home_hotel_bg: '#70AD47',
   home_weather_bg: '#02CCDB',
-
+  weather_screen_bg: '#92BEFF',
+  weather_after_today_bg: '#B3DAFF'
 }
 export default { COLORS };

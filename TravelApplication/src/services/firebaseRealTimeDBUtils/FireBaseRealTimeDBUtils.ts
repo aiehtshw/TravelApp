@@ -1,7 +1,7 @@
 import database, { firebase } from "@react-native-firebase/database";
 import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 export class FireBaseRealTimeDBUtils {
-  static signUp = (user: FirebaseAuthTypes.User,userName:string,profilePhoto:string) => {
+  static signUp = (user: FirebaseAuthTypes.User,userName:string,profilePhoto:string, city:string) => {
     console.log('RTDB',user)
     console.log("userName")
     console.log(userName)
@@ -9,7 +9,9 @@ export class FireBaseRealTimeDBUtils {
     databaseRef.set({
       email: user.email,
       name: userName,
-      profilePhoto:profilePhoto
+      profilePhoto:profilePhoto,
+      uid: user.uid,
+      city: city
     })
       .then(() => {
         console.log('Data added to Realtime Database successfully!');
@@ -20,6 +22,25 @@ export class FireBaseRealTimeDBUtils {
 
 
   }
+  static uploadProfilePhoto = (uid:any,photoUri:any,callback:any) =>{
+    try {
+      const database = firebase.database();
+
+      // Update profile photo
+      database.ref(`UsersList/${uid}/profilePhoto`).set(photoUri)
+        .then(() => {
+          callback(true);
+        })
+        .catch((error) => {
+          console.error(error);
+          callback(false);
+        });
+    } catch (error) {
+      console.error(error);
+      callback(false);
+    }
+  }
+
   static me = (user:any,callback:any) =>{
     console.log(user)
     try {
@@ -42,4 +63,14 @@ export class FireBaseRealTimeDBUtils {
     }
 
   }
+  static decodeBase64 = (base64String) => {
+    try {
+      const decodedString = atob(base64String);
+      console.log('Decoded String:', decodedString);
+      return decodedString
+    } catch (error) {
+      console.log('Error decoding base64:', error);
+      // Handle the error
+    }
+  };
 }

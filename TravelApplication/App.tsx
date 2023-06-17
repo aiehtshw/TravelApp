@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import DefLoading from "./src/components/loading";
+import { DEFAULT_LANGUAGE } from "./src/config";
 
 function App(): JSX.Element {
   return (

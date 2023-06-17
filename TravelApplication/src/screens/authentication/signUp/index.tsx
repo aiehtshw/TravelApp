@@ -1,22 +1,38 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from "react-native";
+import React, { useRef, useState } from "react";
+import { FlatList, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from "react-native";
 import {COLORS} from '~/utils/colors'
-import { DEFAULT_LANGUAGE, Languages } from "~/config";
-import { At, Camera, HidePassword, Password, ProfileIcon, ShowPassword } from "../../../../assets/icons";
+import { Cities, DEFAULT_LANGUAGE, Languages } from "~/config";
+import {
+  At,
+  Camera,
+  Gallery,
+  HidePassword, Location,
+  Password,
+  Photo,
+  ProfileIcon,
+  ShowPassword
+} from "../../../../assets/icons";
 import { RFValue } from "react-native-responsive-fontsize";
 import Login from "../login";
 import { Routes } from "../../../navigator/routes";
 import { FirebaseAuthUtils } from "../../../services/firebaseAuth/FirebaseAuthUtils";
+import { useAppSelector } from "../../../redux/store";
+import RBSheet from "react-native-raw-bottom-sheet";
+import ProfileInfo from "../../profile/components/profileInfo";
 
 const SignUp = ({navigation}:any) => {
   const [showPassword,setShowPassword] = useState<boolean>(true);
   const [mail,setMail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const [username, setUsername] = useState<string>();
+  const [surname, setSurname] = useState<string>();
+  const [city, setCity] = useState<string>(Languages[DEFAULT_LANGUAGE].chooseCity);
+  const languageState = useAppSelector((state) => state.languageSlice);
+  const refRBSheet = useRef();
   const signUp = () => {
     console.log(username)
-    if(mail && password && username){
-      FirebaseAuthUtils.signUp(mail,password,username);
+    if(mail && password && username && city !==Languages[DEFAULT_LANGUAGE].chooseCity){
+      FirebaseAuthUtils.signUp(mail,password,username,city);
     }
   }
   const login = () => {
@@ -77,8 +93,14 @@ const SignUp = ({navigation}:any) => {
               }
             </TouchableOpacity>
           </View>
-        </View>
 
+        </View>
+        <TouchableOpacity style={styles.username} onPress={()=>refRBSheet.current.open()}>
+          <View style={{justifyContent:"center"}}>
+            <Location fill={COLORS.iconColor} width={30} height={30}/>
+          </View>
+          <Text style={styles.login_text}>{city}</Text>
+        </TouchableOpacity>
         <View style={styles.enter}>
           <TouchableOpacity onPress={signUp}>
             <View style={styles.enterArea}>
@@ -104,6 +126,47 @@ const SignUp = ({navigation}:any) => {
         </View>
 
       </View>
+      <RBSheet ref={refRBSheet} closeOnDragDown={true} closeOnPressMask={true} openDuration={300} closeDuration={100}
+               height={300}
+               customStyles={{
+                 wrapper: {
+                 },
+                 container: {
+                   borderTopRightRadius:30,
+                   borderTopLeftRadius:30,
+                   shadowColor: '#000',
+                   shadowOffset: {
+                     width: 10,
+                     height: 10
+                   },
+                   shadowRadius: 30,
+                   shadowOpacity:0.6,
+                   elevation:20
+                 },
+                 draggableIcon: {
+                   backgroundColor: '#000',
+                 }
+               }}
+      >
+
+          <FlatList
+            data={Cities}
+            renderItem={
+              ({ item,index }) => (
+               <>
+                <TouchableOpacity style={{width:'100%',marginLeft:30,padding:10}} onPress={()=>{
+                  setCity(item)
+                  refRBSheet.current.close();
+                }}>
+                  <Text style={{width:'100%'}}>{item}</Text>
+                </TouchableOpacity>
+               </>
+              )
+            }
+            keyExtractor={list => list.id}
+          />
+
+      </RBSheet>
     </View>
   );
 }

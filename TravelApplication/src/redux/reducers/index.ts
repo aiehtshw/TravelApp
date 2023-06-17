@@ -5,6 +5,7 @@ import hotelListSlice from "./hotels/hotelListSlice";
 import loadingSlice from "./loading/loadingSlice";
 import weatherSlice from "./weather/weatherSlice";
 import meSlice from "./me/meSlice";
+import languageSlice from "./language/languageSlice";
 
 
 const rootReducer = combineReducers({
@@ -13,7 +14,8 @@ const rootReducer = combineReducers({
   hotelListSlice:hotelListSlice,
   generalSlice: loadingSlice,
   weatherSlice: weatherSlice,
-  meSlice: meSlice
+  meSlice: meSlice,
+  languageSlice: languageSlice
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

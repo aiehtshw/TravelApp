@@ -6,5 +6,8 @@ export default {
   forgotPassword: 'Şifremi Unuttum',
   email: 'e-mail',
   password: 'şifre',
-  username: 'kullanıcı adı'
+  username: 'kullanıcı adı',
+  takePhoto: 'Fotoğraf Çek',
+  fromGallery: 'Galeriden Yükle',
+  chooseCity: 'Şehir Seçiniz'
 };

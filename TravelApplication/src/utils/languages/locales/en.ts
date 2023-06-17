@@ -6,5 +6,8 @@ export default {
   forgotPassword: 'Forgot Password',
   email: 'e-mail',
   password: 'password',
-  username: 'username'
+  username: 'username',
+  takePhoto: 'From Camera',
+  fromGallery: 'From Gallery',
+  chooseCity: 'Choose a City'
 };

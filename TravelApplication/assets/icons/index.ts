@@ -16,3 +16,5 @@ export const BackArrow = require('./src/back.svg').default;
 export const HomeIcon = require('./src/home.svg').default;
 export const ProfileIcon = require('./src/profile.svg').default;
 export const Celcius = require('./src/celcius.svg').default;
+export const Photo = require('./src/photo.svg').default;
+export const Gallery = require('./src/gallery.svg').default;

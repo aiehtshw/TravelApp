@@ -21,7 +21,7 @@ export class FirebaseAuthUtils {
     });
   }
 
-  static signUp = (mail: string, password:string, username:string) => {
+  static signUp = (mail: string, password:string, username:string,city:string) => {
     auth()
       .createUserWithEmailAndPassword(mail, password)
       .then(() => {
@@ -29,7 +29,7 @@ export class FirebaseAuthUtils {
         const user = auth().currentUser;
         if(user){
           console.log('signUp',user)
-          FirebaseAuthUtils.updateUserProfile(username,'')
+          FirebaseAuthUtils.updateUserProfile(username,'',city)
           console.log(username)
         }
 
@@ -49,7 +49,7 @@ export class FirebaseAuthUtils {
   }
 
   //After Creation user call this
-  static updateUserProfile = (name:string,photoURL:string) => {
+  static updateUserProfile = (name:string,photoURL:string,city) => {
     const user = auth().currentUser;
     if(user){
       user.updateProfile({
@@ -57,7 +57,7 @@ export class FirebaseAuthUtils {
         displayName: name,
       }).then(() => {
         console.log('update',user)
-        FireBaseRealTimeDBUtils.signUp(user,name,photoURL);
+        FireBaseRealTimeDBUtils.signUp(user,name,photoURL,city);
       }).catch((error) => {
         console.error('Error updating display name:', error);
       });

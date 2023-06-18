@@ -13,10 +13,12 @@ import { fetchlWeather } from "../../../redux/reducers/weather/weatherSlice";
 import { callMe } from "../../../redux/reducers/me/meSlice";
 import { useAppSelector } from "../../../redux/store";
 import { FireBaseRealTimeDBUtils } from "../../../services/firebaseRealTimeDBUtils/FireBaseRealTimeDBUtils";
+import { fetchHotelList } from "../../../redux/reducers/hotels/hotelListSlice";
 
 
 const Home = ({navigation}:any) => {
   const dispatch = useDispatch();
+  const languageState = useAppSelector((state) => state.languageSlice);
   const meState = useAppSelector((state) => state.meSlice);
   const box = [
     {
@@ -63,26 +65,29 @@ const Home = ({navigation}:any) => {
     console.log(meState.me)
     switch (title){
       case ScreenTitles.Camera:
-        navigation.navigate(Routes.HomeStack.Photography)
+        navigation.navigate(languageState.defaultLanguage.Photography)
         break;
       case ScreenTitles.Restaurant:
         dispatch(
           fetchlistRestourant({})
         )
-        navigation.navigate(Routes.HomeStack.Restaurant)
+        navigation.navigate(languageState.defaultLanguage.Restaurant)
         break;
       case ScreenTitles.History:
-        navigation.navigate(Routes.HomeStack.History)
+        navigation.navigate(languageState.defaultLanguage.History)
         break;
       case ScreenTitles.Community:
-        navigation.navigate(Routes.HomeStack.Community)
+        navigation.navigate(languageState.defaultLanguage.Community)
         break;
       case ScreenTitles.Hotel:
-        navigation.navigate(Routes.HomeStack.Hotel)
+        dispatch(fetchHotelList({}))
+        navigation.navigate(languageState.defaultLanguage.Hotel)
         break;
       case ScreenTitles.Weather:
-        dispatch(fetchlWeather({}))
-        navigation.navigate(Routes.HomeStack.Weather)
+        dispatch(
+          fetchlWeather({})
+        )
+        navigation.navigate(languageState.defaultLanguage.Weather)
         break;
     }
   }

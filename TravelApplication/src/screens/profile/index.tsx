@@ -9,7 +9,19 @@ import {
 } from "react-native";
 import ProfileInfo from "./components/profileInfo";
 import HomeButton from "../main/home/components/HomeButton";
-import { BackArrow, Camera, Community, Favorites, Gallery, History, Location, Photo, Star } from "#/icons";
+import {
+  Arrow,
+  BackArrow,
+  Camera,
+  Community,
+  Favorites,
+  Gallery,
+  History,
+  Language,
+  Location,
+  Photo,
+  Star
+} from "#/icons";
 import { FirebaseAuthUtils } from "../../services/firebaseAuth/FirebaseAuthUtils";
 import { useAppSelector } from "../../redux/store";
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
@@ -22,7 +34,10 @@ import { callMe } from "../../redux/reducers/me/meSlice";
 import { COLORS } from "../../utils/colors";
 import RBSheet from "react-native-raw-bottom-sheet";
 import tr from "../../utils/languages/locales/tr";
+import { changeLanguage } from "../../redux/reducers/language/languageSlice";
+import en from "../../utils/languages/locales/en";
 const Profile = () => {
+  const languages = useRef();
   const meState = useAppSelector((state) => state.meSlice);
   const languageState = useAppSelector((state) => state.languageSlice);
   const[userPhoto,setUserPhoto] = useState(meState && meState.me && meState.me.profilePhoto !=="" ? meState.me.profilePhoto  :'https://imgv3.fotor.com/images/blog-cover-image/part-blurry-image.jpg');
@@ -36,42 +51,52 @@ const Profile = () => {
     {
       id: '2',
       icon: <Community  width={30} height={30}/>,
-      text: "City Couch Community",
+      text: languageState.defaultLanguage.cityCoachCommunity,
       disable: true
     },
     {
       id: '3',
       icon: <Camera width={30} height={30}/>,
-      text: "Shared Photo",
+      text: languageState.defaultLanguage.sharedPhoto,
       disable: true
     },
     {
       id: '4',
       icon: <History  width={30} height={30}/>,
-      text: "Cultural Sharing",
+      text: languageState.defaultLanguage.culturalSharing,
       disable: true
     },
     {
       id: '5',
       icon: <Star width={30} height={30}/>,
-      text: "Created Travel Path/Joined Travel Path",
+      text: languageState.defaultLanguage.travelPath,
       disable: true
     },
     {
       id: '6',
-      icon: <Favorites width={30} height={30}/>,
-      text: "Favorites",
+      icon: <Language width={30} height={30}/>,
+      text: languageState.defaultLanguage.choosen,
+      onPress: () => {
+        languages.current.open();
+      },
       disable: false,
     },
     {
       id: '7',
+      icon: <Favorites width={30} height={30}/>,
+      text: languageState.defaultLanguage.favorites,
+      disable: false,
+    },
+    {
+      id: '8',
       icon: <BackArrow width={30} height={30}/>,
-      text: "LogOut",
+      text: languageState.defaultLanguage.logOut,
       onPress: () => {
         FirebaseAuthUtils.logOut()
       },
       disable: false
-    }
+    },
+
   ];
 
   let name = "Nejdet";
@@ -270,13 +295,51 @@ const Profile = () => {
             <View style={styles.photo}>
               <Photo fill={'#000'}/>
             </View>
-            <Text style={styles.popupButton}>{Languages[DEFAULT_LANGUAGE].takePhoto}</Text>
+            <Text style={styles.popupButton}>{languageState.defaultLanguage.takePhoto}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.touchableOpacityContainer} onPress={imageGalleryLaunch} activeOpacity={0.6}>
             <View style={styles.photo}>
               <Gallery fill={'#000'} width={32.009} height={32.009}/>
             </View>
             <Text style={styles.popupButton}>{languageState.defaultLanguage.fromGallery}</Text>
+          </TouchableOpacity>
+        </View>
+      </RBSheet>
+
+      <RBSheet ref={languages} closeOnDragDown={true} closeOnPressMask={true} openDuration={300} closeDuration={100}
+               height={160}
+               customStyles={{
+                 wrapper: {
+                 },
+                 container: {
+                   borderTopRightRadius:30,
+                   borderTopLeftRadius:30,
+                   shadowColor: '#000',
+                   shadowOffset: {
+                     width: 10,
+                     height: 10
+                   },
+                   shadowRadius: 30,
+                   shadowOpacity:0.6,
+                   elevation:20
+                 },
+                 draggableIcon: {
+                   backgroundColor: '#000',
+                 }
+               }}
+      >
+        <View style={styles.container}>
+          <TouchableOpacity style={styles.touchableOpacityContainer} onPress={()=>dispatch(changeLanguage(tr))} activeOpacity={0.6}>
+            <View style={styles.photo}>
+              <Arrow fill={'#000'} width={32.009} height={32.009}/>
+            </View>
+            <Text style={styles.popupButton}>{languageState.defaultLanguage.language}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.touchableOpacityContainer} onPress={()=>dispatch(changeLanguage(en))} activeOpacity={0.6}>
+            <View style={styles.photo}>
+              <Arrow fill={'#000'} width={32.009} height={32.009}/>
+            </View>
+            <Text style={styles.popupButton}>{languageState.defaultLanguage.language2}</Text>
           </TouchableOpacity>
         </View>
       </RBSheet>

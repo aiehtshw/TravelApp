@@ -23,10 +23,10 @@ const Hotel = ( props:any ) => {
           fontWeight:"bold"
         }}>{props.hotel_name}</Text>
         <View style={styles.point}>
-          <PointCircle point={props.total_vote/props.total_vote_count}/>
+          <PointCircle point={props.rank}/>
           <Text style={styles.total_count_text}>{props.total_vote_count}</Text>
         </View>
-        <Text style={{height:180}} numberOfLines={9}>{props.description}</Text>
+        <Text style={{height:180}} numberOfLines={6}>{props.description}</Text>
       </View>
     </View>
   );

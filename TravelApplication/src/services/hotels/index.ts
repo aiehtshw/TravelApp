@@ -22,7 +22,7 @@ export default class HotelListAPI {
         lang: 'en_US'
       },
       headers: {
-        'X-RapidAPI-Key': 'da0fce7008mshaafb82a9f1f3679p123467jsne61d2e83d9a5',
+        'X-RapidAPI-Key': 'fc6c10a051mshb647d537540e222p19239bjsna7bd3befbf9a',
         'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
       }
     };

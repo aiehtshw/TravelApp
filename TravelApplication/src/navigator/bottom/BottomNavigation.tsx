@@ -5,10 +5,11 @@ import { Routes } from "../routes";
 import { HomeIcon, ProfileIcon } from "#/icons";
 import { COLORS } from "~/utils/colors";
 import HomeNavigator from "../main/HomeNavigator";
+import { useAppSelector } from "../../redux/store";
 
 const Tabs = createBottomTabNavigator();
 const BottomNavigator = () => {
-
+  const languageState = useAppSelector((state) => state.languageSlice);
   return(
     <Tabs.Navigator
     screenOptions={{
@@ -23,14 +24,14 @@ const BottomNavigator = () => {
         options={{
         tabBarIcon: ({ color, size }) => <HomeIcon width={20} height={20} fill={color} />
         }}
-        name={Routes.BottomStack.Home}
+        name={languageState.defaultLanguage.homeScreen}
         component={HomeNavigator}
       />
       <Tabs.Screen
         options={{
           tabBarIcon: ({ color, size }) => <ProfileIcon width={20} height={20} fill={color} />
         }}
-        name={Routes.BottomStack.Profile}
+        name={languageState.defaultLanguage.profile}
         component={Profile}
       />
     </Tabs.Navigator>

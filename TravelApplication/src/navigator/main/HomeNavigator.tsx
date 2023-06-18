@@ -9,9 +9,11 @@ import Community from "../../screens/main/community";
 import History from "../../screens/main/history";
 import Weather from "../../screens/main/weather";
 import { COLORS } from "../../utils/colors";
+import { useAppSelector } from "../../redux/store";
 const Stack = createStackNavigator();
 
 const HomeNavigator = () => {
+  const languageState = useAppSelector((state) => state.languageSlice);
   return (
     <Stack.Navigator screenOptions={({ route }) => ({
       //tabBarShowLabel: false,
@@ -25,13 +27,13 @@ const HomeNavigator = () => {
 
       gestureEnabled: false
     })}>
-      <Stack.Screen name={Routes.HomeStack.Home} component={Home}/>
-      <Stack.Screen name={Routes.HomeStack.Photography} component={Photography}/>
-      <Stack.Screen name={Routes.HomeStack.Restaurant} component={Restaurant}/>
-      <Stack.Screen name={Routes.HomeStack.History} component={History}/>
-      <Stack.Screen name={Routes.HomeStack.Community} component={Community}/>
-      <Stack.Screen name={Routes.HomeStack.Hotel} component={Hotels}/>
-      <Stack.Screen name={Routes.HomeStack.Weather} component={Weather}/>
+      <Stack.Screen name={languageState.defaultLanguage.home} component={Home}/>
+      <Stack.Screen name={languageState.defaultLanguage.Photography} component={Photography}/>
+      <Stack.Screen name={languageState.defaultLanguage.Restaurant} component={Restaurant}/>
+      <Stack.Screen name={languageState.defaultLanguage.History} component={History}/>
+      <Stack.Screen name={languageState.defaultLanguage.Community} component={Community}/>
+      <Stack.Screen name={languageState.defaultLanguage.Hotel} component={Hotels}/>
+      <Stack.Screen name={languageState.defaultLanguage.Weather} component={Weather}/>
 
     </Stack.Navigator>
   );

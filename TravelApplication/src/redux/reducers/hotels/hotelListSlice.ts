@@ -4,7 +4,8 @@ import HotelListAPI from "../../../services/hotels";
 
 // @ts-ignore
 const initialState: HotelListAPIResponse = {
-  data: []
+  data: [],
+  loading: false
 }
 
 export const fetchHotelList = createAsyncThunk(
@@ -24,26 +25,28 @@ const hotelListSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchHotelList.pending,(state, action) => {
       console.log("wait")
-
+      state.loading = true;
     })
     builder.addCase(
       fetchHotelList.fulfilled,
       (state, action: PayloadAction<HotelListAPIResponse>) => {
         if(action.payload!==undefined){
           console.log("fulfilled")
-          initialState.data = action.payload.data;
+          state.data = action.payload.data;
           console.log("action payload")
           console.log(action.payload.data);
           //console.log(action)
-
+          state.loading = false;
         }
         else{
           console.log("internet yok")
+          state.loading = false;
         }
       }
     );
     builder.addCase(fetchHotelList.rejected,(state, action)=>{
       console.log("rejected")
+      state.loading = false;
     })
   }
 });

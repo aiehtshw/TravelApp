@@ -22,7 +22,8 @@ const Restaurant = () => {
     }
   },[RestourantListState.data])
   useEffect(()=>{
-    dispatch(showLoading(false))
+    if(restourants)
+      dispatch(showLoading(false))
   },[restourants])
   const restaurantDetails = (item:any) => {
 
@@ -35,15 +36,16 @@ const Restaurant = () => {
         data={restourants}
         keyExtractor={(item, index) => index}
         renderItem={({ item }) => (
+          item && item.name?
           <TouchableOpacity activeOpacity={0.9} onPress={ () => restaurantDetails(item) }>
             <Hotel
               hotel_name={item.name ? item.name : "Empty"}
               image = {item.photo ? item.photo.images.small.url: 'https://reactnative.dev/img/tiny_logo.png'}
-              total_vote_count={item.raw_ranking}
-              description={item.description}
+              rank = {item.rating}
+              description={item.description ? item.description:'We do not have any description'}
             />
           </TouchableOpacity>
-
+        :<></>
         )}
       />
       }

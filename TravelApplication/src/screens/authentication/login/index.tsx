@@ -6,13 +6,15 @@ import { At, Camera, HidePassword, Password, ShowPassword } from "../../../../as
 import { RFValue } from "react-native-responsive-fontsize";
 import { Routes } from "../../../navigator/routes";
 import { FirebaseAuthUtils } from "../../../services/firebaseAuth/FirebaseAuthUtils";
+import { useAppSelector } from "../../../redux/store";
 
 const Login = ({navigation}:any) => {
+  const languageState = useAppSelector((state) => state.languageSlice);
   const [showPassword,setShowPassword] = useState<boolean>(true);
   const [mail,setMail] = useState<string>();
   const [password, setPassword] = useState<string>();
   const signUp = () => {
-    navigation.navigate(Routes.AuthStack.SingUp);
+    navigation.navigate(languageState.defaultLanguage.signUp);
   }
   const forgotPassword = () => {
 
@@ -26,7 +28,7 @@ const Login = ({navigation}:any) => {
       <View style={styles.content}>
 
         <View style={styles.textContainer}>
-          <Text style={{fontSize:RFValue(20),fontWeight:'bold'}}>{Languages[DEFAULT_LANGUAGE].login}</Text>
+          <Text style={{fontSize:RFValue(20),fontWeight:'bold'}}>{languageState.defaultLanguage.login}</Text>
         </View>
 
         <View style={styles.email}>
@@ -37,7 +39,7 @@ const Login = ({navigation}:any) => {
             onChangeText={mail => setMail(mail)}
             value={mail}
             keyboardType={"email-address"}
-            placeholder={Languages[DEFAULT_LANGUAGE].email}
+            placeholder={languageState.defaultLanguage.email}
             style={styles.login_text}/>
         </View>
 
@@ -46,7 +48,7 @@ const Login = ({navigation}:any) => {
             <Password fill={COLORS.iconColor} width={20} height={20}/>
           </View>
           <TextInput
-            placeholder={Languages[DEFAULT_LANGUAGE].password}
+            placeholder={languageState.defaultLanguage.password}
             secureTextEntry={showPassword}
             onChangeText={password => setPassword(password)}
             value={password}
@@ -70,7 +72,7 @@ const Login = ({navigation}:any) => {
             <Text style={
               { color:COLORS.placeHolder,
                 fontStyle:"italic"
-              }}>{Languages[DEFAULT_LANGUAGE].forgotPassword}</Text>
+              }}>{languageState.defaultLanguage.forgotPassword}</Text>
           </TouchableOpacity>
         </View>
 
@@ -82,19 +84,19 @@ const Login = ({navigation}:any) => {
                   color:COLORS.white,
                   fontSize:RFValue(15),
                   fontWeight:'bold',}}>
-                {Languages[DEFAULT_LANGUAGE].login}
+                {languageState.defaultLanguage.login}
               </Text>
             </View>
           </TouchableOpacity>
         </View>
 
         <View style={styles.haveAccount}>
-          <Text>{Languages[DEFAULT_LANGUAGE].haveYouAccount}</Text>
+          <Text>{languageState.defaultLanguage.haveYouAccount}</Text>
           <TouchableOpacity onPress={signUp}>
             <Text style={{
               color:COLORS.placeHolder,
               fontStyle:"italic",
-            }}>  {Languages[DEFAULT_LANGUAGE].signUp}</Text>
+            }}>  {languageState.defaultLanguage.signUp}</Text>
           </TouchableOpacity>
         </View>
 

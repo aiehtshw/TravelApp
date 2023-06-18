@@ -34,15 +34,15 @@ const listRestourantsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchlistRestourant.pending,(state, action) => {
       console.log("wait")
-      initialState.loading = true;
+      state.loading = true;
     })
     builder.addCase(
       fetchlistRestourant.fulfilled,
       (state, action: PayloadAction<RestourantAPIResponse>) => {
         if(action.payload!==undefined){
           console.log("fulfilled")
-          initialState.data = action.payload.data
-          initialState.loading = false;
+          state.data = action.payload.data
+          state.loading = false;
           console.log("action payload")
           console.log(action.payload.data);
           //console.log(action)
@@ -56,7 +56,7 @@ const listRestourantsSlice = createSlice({
     );
     builder.addCase(fetchlistRestourant.rejected,(state, action)=>{
       console.log("rejected")
-      initialState.loading = false;
+      state.loading = false;
     })
   }
 });

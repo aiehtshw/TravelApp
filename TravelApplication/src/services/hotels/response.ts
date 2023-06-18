@@ -2,6 +2,7 @@ export interface HotelListAPIResponse {
   data: Daum[]
   status: Status
   paging: Paging
+  loading: boolean
 }
 
 export interface Daum {

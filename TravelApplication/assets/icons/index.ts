@@ -18,3 +18,5 @@ export const ProfileIcon = require('./src/profile.svg').default;
 export const Celcius = require('./src/celcius.svg').default;
 export const Photo = require('./src/photo.svg').default;
 export const Gallery = require('./src/gallery.svg').default;
+export const Language = require('./src/language.svg').default;
+export const Arrow = require('./src/arrow.svg').default;

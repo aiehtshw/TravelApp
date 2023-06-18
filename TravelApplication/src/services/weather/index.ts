@@ -1,17 +1,15 @@
 import axios from 'axios'
 import { WeatherAPIResponse } from "./response";
-import { useAppSelector } from "../../redux/store";
 
 export default class WeatherAPI {
 
   // @ts-ignore
   static async fetch(): Promise<WeatherAPIResponse> {
-    const meState = useAppSelector((state) => state.meSlice);
     const options = {
       method: 'GET',
       url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
       params: {
-        q: meState.me.city,
+        q: 'Ankara',
         days: '3'
       },
       headers: {

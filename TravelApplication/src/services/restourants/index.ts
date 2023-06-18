@@ -9,7 +9,7 @@ export default class RestourantAPI {
       method: 'GET',
       url: 'https://travel-advisor.p.rapidapi.com/restaurants/list',
       params: {
-        location_id: '293919',
+        location_id: '298656',
         restaurant_tagcategory: '10591',
         restaurant_tagcategory_standalone: '10591',
         currency: 'USD',
@@ -19,7 +19,7 @@ export default class RestourantAPI {
         lang: 'en_US'
       },
       headers: {
-        'X-RapidAPI-Key': 'da0fce7008mshaafb82a9f1f3679p123467jsne61d2e83d9a5',
+        'X-RapidAPI-Key': 'fc6c10a051mshb647d537540e222p19239bjsna7bd3befbf9a',
         'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
       }
     };
